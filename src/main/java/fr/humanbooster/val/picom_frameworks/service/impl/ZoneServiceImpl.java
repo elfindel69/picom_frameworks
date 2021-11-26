@@ -1,7 +1,5 @@
 package fr.humanbooster.val.picom_frameworks.service.impl;
 
-import fr.humanbooster.val.picom_frameworks.business.Annonce;
-import fr.humanbooster.val.picom_frameworks.business.Arret;
 import fr.humanbooster.val.picom_frameworks.business.Zone;
 import fr.humanbooster.val.picom_frameworks.dao.ZoneDao;
 import fr.humanbooster.val.picom_frameworks.service.ZoneService;
@@ -26,8 +24,9 @@ public class ZoneServiceImpl implements ZoneService {
 
 
     @Override
-    public Zone ajouterZone(String nom) {
-        return zoneDao.save(new Zone(nom));
+    public Zone ajouterZone(String nom, Float multiplicateur) {
+        System.out.println(new Zone(nom, multiplicateur));
+        return zoneDao.save(new Zone(nom, multiplicateur));
     }
 
 

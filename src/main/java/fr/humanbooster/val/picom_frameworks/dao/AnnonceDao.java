@@ -12,7 +12,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.Date;
 import java.util.List;
 
-@RepositoryRestResource(path = "annonces")
+@RepositoryRestResource(collectionResourceRel = "annonces",path = "annonces")
 public interface AnnonceDao extends JpaRepository<Annonce, Long> {
     // Requête par dérivation
     List<Annonce> findByClient(Client client);

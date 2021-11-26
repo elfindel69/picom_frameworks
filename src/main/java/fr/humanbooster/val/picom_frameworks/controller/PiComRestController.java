@@ -8,12 +8,11 @@ import fr.humanbooster.val.picom_frameworks.service.AnnonceService;
 import fr.humanbooster.val.picom_frameworks.service.ArretService;
 import fr.humanbooster.val.picom_frameworks.service.UtilisateurService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class PiComRestController {
 
     private final AnnonceService annonceService;
@@ -31,11 +30,25 @@ public class PiComRestController {
         return utilisateurService.getPasswordByEmail(email);
     }
 
-    @CrossOrigin(origins = "*")
+
+    @GetMapping("/clients/{email}")
+    Client getClientByEmail(@PathVariable String email){
+        return utilisateurService.getClientByEmail(email);
+    }
+
     @PostMapping("/clients/login")
     boolean getPasswordByEmail(@RequestBody LoginForm loginForm){
         System.out.println(loginForm);
         return utilisateurService.checkEmailAndPassword(loginForm.getEmail(), loginForm.getPassword());
+    }
+
+    @GetMapping("annonces/{email}")
+    List<Annonce> getAnnonces(@PathVariable String email){
+        Client client = utilisateurService.getClientByEmail(email);
+        System.out.println(client);
+        List<Annonce> res =  annonceService.recupererAnnonces(client);
+        System.out.println(res);
+        return res;
     }
 
     @GetMapping("annonces/{id}/prix")
@@ -57,12 +70,11 @@ public class PiComRestController {
         Client client = utilisateurService.recupererClientParId(id);
        return annonceService.recupererAnnonces(client);
     }
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/clients/login").allowedOrigins("*");
-            }
-        };
+
+    @DeleteMapping("annonces/{id}")
+    boolean deleteAnnonce(@PathVariable Long id){
+       return annonceService.supprimerAnnonce(id);
     }
+
+
 }

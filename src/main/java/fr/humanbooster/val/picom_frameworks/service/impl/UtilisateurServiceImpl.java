@@ -78,5 +78,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         String passwordBase = utilisateurDao.findPasswordByEmail(email);
         return passwordBase.equals(password);
     }
+
+    @Override
+    public Client getClientByEmail(String email) {
+        return clientDao.findByEmail(email);
+    }
 }
 

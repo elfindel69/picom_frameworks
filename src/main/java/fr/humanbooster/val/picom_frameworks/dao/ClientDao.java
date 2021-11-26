@@ -7,4 +7,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RepositoryRestResource(collectionResourceRel = "clients",path = "clients")
 public interface ClientDao extends JpaRepository<Client, Long> {
+    Client findByEmail(String email);
 }

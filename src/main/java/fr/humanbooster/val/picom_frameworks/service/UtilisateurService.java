@@ -27,4 +27,6 @@ public interface UtilisateurService {
     String getPasswordByEmail(String email);
 
     boolean checkEmailAndPassword(String email, String password);
+
+    Client getClientByEmail(String email);
 }

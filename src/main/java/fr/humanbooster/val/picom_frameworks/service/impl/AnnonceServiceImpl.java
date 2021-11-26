@@ -66,7 +66,7 @@ public class AnnonceServiceImpl implements AnnonceService {
         float prix = .0f;
         for(Zone zone : annonce.getZones() ){
             for(TrancheHoraire th : annonce.getTrancheHoraires()){
-                prix +=zone.getMutliplicateur()*th.getPrix();
+                prix +=zone.getMultiplicateur()*th.getPrix();
             }
         }
         return prix;

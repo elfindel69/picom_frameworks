@@ -23,13 +23,14 @@ public class ArretServiceImpl implements ArretService {
     }
 
     @Override
-    public Arret ajouterArret(String nom, Long idZone) {
+    public Arret ajouterArret(Arret arret, Long idZone) {
         Zone zone = zoneService.recupererZone(idZone);
         if (zone==null) {
             return null;
         }
         else {
-            return arretDao.save(new Arret(nom, zone));
+            arret.setZone(zone);
+            return arretDao.save(arret);
         }
     }
 

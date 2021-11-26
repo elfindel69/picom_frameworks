@@ -1,6 +1,9 @@
 package fr.humanbooster.val.picom_frameworks.business;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import net.bytebuddy.implementation.bind.annotation.DefaultCall;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -17,8 +20,8 @@ public class Zone {
     @NotBlank(message = "la zone doit avoir un nom")
     private String nom;
 
-    @NotNull
-    private Float mutliplicateur;
+
+    private Float multiplicateur;
 
     @OneToMany(mappedBy = "zone" ,fetch=FetchType.EAGER, orphanRemoval = true)
     private List<Arret> arrets;
@@ -28,6 +31,11 @@ public class Zone {
     private List<Annonce> annonces;
 
     public Zone() {
+    }
+
+    public Zone(String nom, Float multiplicateur) {
+        this.nom = nom;
+        this.multiplicateur = multiplicateur;
     }
 
     public List<Annonce> getAnnonces() {
@@ -67,12 +75,12 @@ public class Zone {
         this.nom = nom;
     }
 
-    public Float getMutliplicateur() {
-        return mutliplicateur;
+    public Float getMultiplicateur() {
+        return multiplicateur;
     }
 
-    public void setMutliplicateur(Float mutliplicateur) {
-        this.mutliplicateur = mutliplicateur;
+    public void setMultiplicateur(Float mutliplicateur) {
+        this.multiplicateur = mutliplicateur;
     }
 
     @Override
@@ -80,7 +88,7 @@ public class Zone {
         return "Zone{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
-                ", mutliplicateur=" + mutliplicateur +
+                ", mutliplicateur=" + multiplicateur +
                 '}';
     }
 }

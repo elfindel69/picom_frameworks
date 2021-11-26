@@ -6,7 +6,7 @@ import fr.humanbooster.val.picom_frameworks.business.Zone;
 import java.util.List;
 
 public interface ArretService {
-    Arret ajouterArret(String nom, Long idZone);
+    Arret ajouterArret(Arret nom, Long idZone);
 
     Arret enregistrerArret(Arret arret);
 
